@@ -1,0 +1,75 @@
+name: Deploy para GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissões necessárias para publicar no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita execuções concorrentes do deploy
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Definir basePath
+        id: basepath
+        run: |
+          REPO="${{ github.event.repository.name }}"
+          OWNER="${{ github.repository_owner }}"
+          # Página de usuário/organização (owner.github.io) é servida na raiz.
+          if [ "$REPO" = "${OWNER}.github.io" ]; then
+            echo "value=" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=/$REPO" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Build (export estático)
+        env:
+          STATIC_EXPORT: "true"
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.basepath.outputs.value }}
+        run: pnpm build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload do artefato
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
