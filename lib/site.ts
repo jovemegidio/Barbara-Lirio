@@ -1,5 +1,5 @@
 // Número de WhatsApp da Bárbara (substituir pelo número real).
-export const WHATSAPP_NUMBER = "5511999999999"
+export const WHATSAPP_NUMBER = "5511991102926"
 
 const DEFAULT_MESSAGE = "Olá, Bárbara! Vim pelo site e gostaria de saber mais!"
 
