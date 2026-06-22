@@ -11,7 +11,7 @@ import { asset } from "@/lib/asset"
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const headlineLead = "Psicoterapia para quem sente que está dando conta de tudo,"
-const headlineAccent = "menos de si"
+const headlineAccent = "menos de si."
 
 export function Hero() {
   const reduce = useReducedMotion()
@@ -70,10 +70,11 @@ export function Hero() {
                 <span key={i} className="inline-block overflow-hidden align-bottom">
                   <motion.span variants={wordVariant} className="inline-block">
                     {word}
-                    {i < words.length - 1 ? "\u00A0" : " "}
+                    {i < words.length - 1 ? "\u00A0" : ""}
                   </motion.span>
                 </span>
               ))}
+              {"\u00A0"}
               <span className="inline-block overflow-hidden align-bottom">
                 <motion.span variants={wordVariant} className="inline-block text-primary">
                   {headlineAccent}
@@ -86,11 +87,6 @@ export function Hero() {
             Ansiedade, insegurança, conflitos nos relacionamentos, baixa autoestima e autocrítica podem fazer você
             sentir que está sempre tentando dar conta de tudo, mas sem conseguir se sentir bem de verdade.
           </motion.p>
-          <motion.p variants={fade} className="mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
-            A terapia é um espaço seguro para olhar para o que você sente, compreender sua história e construir formas
-            mais saudáveis de se relacionar com você, com os outros e com a vida.
-          </motion.p>
-
           <motion.div variants={fade} className="mt-8">
             <CtaButton href={whatsappLink()} variant="primary" icon={<MessageCircle className="h-4 w-4" />}>
               Conversar com a Bárbara pelo WhatsApp

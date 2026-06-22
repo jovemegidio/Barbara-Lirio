@@ -1,22 +1,22 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Montserrat, Geist_Mono } from 'next/font/google'
+import { Inter, Montserrat, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { WhatsappFloat } from '@/components/whatsapp-float'
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const montserrat = Montserrat({
+  variable: '--font-montserrat',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
 
-const montserrat = Montserrat({
-  variable: '--font-montserrat',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -60,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${cormorant.variable} ${montserrat.variable} ${geistMono.variable} bg-background`}
+      className={`${montserrat.variable} ${inter.variable} ${geistMono.variable} bg-background`}
     >
       <body className="bg-background font-sans antialiased">
         <SiteHeader />
