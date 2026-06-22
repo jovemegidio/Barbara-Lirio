@@ -55,7 +55,7 @@ export function SiteFooter() {
           <p className="text-xs text-primary-foreground/70">
             © {new Date().getFullYear()} {PROFESSIONAL.name} · {PROFESSIONAL.crp}. Todos os direitos reservados.
           </p>
-          <p className="mt-2 text-xs text-primary-foreground/70">Feito por Elite Company & Egidio Dev.</p>
+          <p className="mt-2 text-xs text-primary-foreground/70">Feito por Elite Company.</p>
         </div>
       </div>
     </footer>
