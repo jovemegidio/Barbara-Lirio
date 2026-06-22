@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useRef } from "react"
+import { Fragment, useRef } from "react"
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { MapPin, Monitor, MessageCircle } from "lucide-react"
 import { CtaButton } from "@/components/cta-button"
@@ -67,14 +67,14 @@ export function Hero() {
             </span>
             <span aria-hidden className="inline">
               {words.map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden align-bottom">
-                  <motion.span variants={wordVariant} className="inline-block">
-                    {word}
-                    {i < words.length - 1 ? "\u00A0" : ""}
-                  </motion.span>
-                </span>
+                <Fragment key={i}>
+                  <span className="inline-block overflow-hidden align-bottom">
+                    <motion.span variants={wordVariant} className="inline-block">
+                      {word}
+                    </motion.span>
+                  </span>{" "}
+                </Fragment>
               ))}
-              {"\u00A0"}
               <span className="inline-block overflow-hidden align-bottom">
                 <motion.span variants={wordVariant} className="inline-block text-primary">
                   {headlineAccent}
