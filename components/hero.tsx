@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Fragment, useRef } from "react"
+import { useRef } from "react"
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { MapPin, Monitor, MessageCircle } from "lucide-react"
 import { CtaButton } from "@/components/cta-button"
@@ -24,15 +24,9 @@ export function Hero() {
   const sealY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -50])
   const patternY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120])
 
-  const words = headlineLead.split(" ")
-
   const container = {
     hidden: {},
     show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
-  }
-  const wordVariant = {
-    hidden: { opacity: 0, y: "0.6em", filter: "blur(6px)" },
-    show: { opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.7, ease: EASE } },
   }
   const fade = {
     hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
@@ -61,27 +55,12 @@ export function Hero() {
             Psicoterapia clínica
           </motion.span>
 
-          <h1 className="mt-6 text-balance font-serif text-4xl font-semibold leading-[1.1] text-foreground md:text-5xl lg:text-6xl">
-            <span className="sr-only">
-              {headlineLead} {headlineAccent}
-            </span>
-            <span aria-hidden className="inline">
-              {words.map((word, i) => (
-                <Fragment key={i}>
-                  <span className="inline-block overflow-hidden align-bottom">
-                    <motion.span variants={wordVariant} className="inline-block">
-                      {word}
-                    </motion.span>
-                  </span>{" "}
-                </Fragment>
-              ))}
-              <span className="inline-block overflow-hidden align-bottom">
-                <motion.span variants={wordVariant} className="inline-block text-primary">
-                  {headlineAccent}
-                </motion.span>
-              </span>
-            </span>
-          </h1>
+          <motion.h1
+            variants={fade}
+            className="mt-6 text-balance font-serif text-4xl font-semibold leading-[1.1] text-foreground md:text-5xl lg:text-6xl"
+          >
+            {headlineLead} <span className="text-primary">{headlineAccent}</span>
+          </motion.h1>
 
           <motion.p variants={fade} className="mt-6 max-w-xl text-pretty leading-relaxed text-muted-foreground">
             Ansiedade, insegurança, conflitos nos relacionamentos, baixa autoestima e autocrítica podem fazer você
